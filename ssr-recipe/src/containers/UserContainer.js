@@ -14,7 +14,7 @@ const UserContainer = ({ id }) => {
     dispatch(getUser(id));
   }, [dispatch, id, user]);
 
-  if (!user) null;
+  if (!user) return null;
 
   return <User user={user} />;
 };
