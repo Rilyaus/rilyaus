@@ -5,8 +5,14 @@ const posts = new Router();
 
 posts.get('/', postsCtrl.list);
 posts.post('/', postsCtrl.write);
-posts.get('/:id', postsCtrl.read);
-posts.delete('/:id', postsCtrl.remove);
-posts.patch('/:id', postsCtrl.update);
+
+const post = new Router();
+
+post.get('/:id', postsCtrl.read);
+post.delete('/:id', postsCtrl.remove);
+post.patch('/:id', postsCtrl.update);
+
+// ObjectId 검증
+posts.use('/:id', postsCtrl.checkObjectId, post.routes());
 
 export default posts;
