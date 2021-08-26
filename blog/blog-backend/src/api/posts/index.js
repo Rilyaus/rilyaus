@@ -10,10 +10,10 @@ posts.post('/', checkLoggedIn, postsCtrl.write);
 const post = new Router();
 
 post.get('/:id', postsCtrl.read);
-post.delete('/:id', checkLoggedIn, postsCtrl.remove);
-post.patch('/:id', checkLoggedIn, postsCtrl.update);
+post.delete('/:id', checkLoggedIn, postsCtrl.checkOwnPost, postsCtrl.remove);
+post.patch('/:id', checkLoggedIn, postsCtrl.checkOwnPost, postsCtrl.update);
 
 // ObjectId 검증
-posts.use('/:id', postsCtrl.checkObjectId, post.routes());
+posts.use('/:id', postsCtrl.getPostById, post.routes());
 
 export default posts;
